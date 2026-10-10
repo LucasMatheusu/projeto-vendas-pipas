@@ -1,0 +1,75 @@
+
+CREATE DATABASE IF NOT EXISTS Pipas01;
+USE Pipas01;
+
+CREATE TABLE Pipa (
+    Id_pipa INT PRIMARY KEY,
+    Modelo_pipa VARCHAR(100),
+    Preco DECIMAL(10,2)
+);
+
+
+CREATE TABLE Linha (
+    Id_linha INT PRIMARY KEY,
+    Tipo_linha VARCHAR(100),
+    Preco DECIMAL(10,2)
+);
+
+
+CREATE TABLE Saidas (
+    Id_saida INT PRIMARY KEY,
+    Id_pipa INT,
+    Quantidade INT,
+    Data DATE,
+    Valor_total DECIMAL(10,2)
+);
+
+
+CREATE TABLE Estoque (
+    Id_estoque INT PRIMARY KEY,
+    Id_pipa INT,
+    Quantidade_estoque INT
+);
+
+insert into Pipa(Id_pipa, Modelo_pipa, Preco)
+values(1, 'Charuto', 4.50 ),
+      (2, 'Carrapeta', 5.00),
+      (3, 'Raia', 2.50),
+      (4, 'Morcego', 3.50),
+      (5, 'Peao', 3.90),
+      (6, 'Capucheta', 5.50)
+;
+
+insert into Linha(Id_linha, Tipo_linha, preco)
+values(1, 'Comum', 3.50),
+      (2, 'Chilena', 5.00),
+      (3, 'Indonesia', 5.50),
+      (4, 'Po de ferro', 4.00),
+      (5, 'Lampada', 3.50)
+;
+
+insert into Saidas(Id_saida, Id_pipa, Quantidade, Data)
+values(1, 1, 20, '2026-06-06'),
+      (2, 1, 40, '2026-06-07'),
+      (3, 1, 34, '2026-06-08'),
+      (4, 2, 10, '2026-06-06'),
+      (5, 2, 29, '2026-06-06'),
+      (7, 3, 10, '2026-06-29'),
+      (8, 3, 12, '2026-06-30'),
+      (9, 4, 40,  '2026-07-01'),
+      (10, 5, 33, '2026-07-01'),
+      (11, 5, 21, '2026-07-02'),
+      (12, 6, 40, '2026-07-02'),
+      (13, 6, 30, '2026-07-03')
+
+;
+
+
+SELECT 
+    Saidas.Data,
+    Pipa.Modelo_pipa,
+    SUM(Saidas.Quantidade) AS Total_vendido
+FROM Saidas
+JOIN Pipa ON Saidas.Id_pipa = Pipa.Id_pipa
+GROUP BY Saidas.Data, Pipa.Modelo_pipa
+ORDER BY Saidas.Data ASC;
