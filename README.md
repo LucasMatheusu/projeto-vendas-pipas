@@ -6,7 +6,7 @@ Fala, pessoal! 👋 Este é um projeto pessoal de análise de dados desenvolvido
 
 ## 📸 Visualização do Dashboard
 
-![Preview do Dashboard](power.png)
+![Preview do Dashboard](projeto-vendas-pipas/power.png)
 
 ---
 
